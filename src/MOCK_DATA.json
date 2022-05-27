@@ -1,0 +1,64 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "name": "Virgil Rabbe",
+      "email": "vrabbe0@liveinternet.ru",
+      "phone": "610-637-3998"
+    },
+    {
+      "id": 2,
+      "name": "Phylys MacDaid",
+      "email": "pmacdaid1@tripod.com",
+      "phone": "185-499-2527"
+    },
+    {
+      "id": 3,
+      "name": "Vinny MacGillivrie",
+      "email": "vmacgillivrie2@skype.com",
+      "phone": "644-603-9830"
+    },
+    {
+      "id": 4,
+      "name": "Gertrud Monahan",
+      "email": "gmonahan3@so-net.ne.jp",
+      "phone": "611-889-5964"
+    },
+    {
+      "id": 5,
+      "name": "Andee Wrightham",
+      "email": "awrightham4@e-recht24.de",
+      "phone": "325-322-9802"
+    },
+    {
+      "id": 6,
+      "name": "Karissa Restill",
+      "email": "krestill5@tmall.com",
+      "phone": "381-123-4628"
+    },
+    {
+      "id": 7,
+      "name": "Shel MacQuist",
+      "email": "smacquist6@cocolog-nifty.com",
+      "phone": "212-645-7050"
+    },
+    {
+      "id": 8,
+      "name": "Kali Sapp",
+      "email": "ksapp7@example.com",
+      "phone": "723-335-5285"
+    },
+    {
+      "id": 9,
+      "name": "Rickie Glaze",
+      "email": "rglaze8@fotki.com",
+      "phone": "552-226-5104"
+    },
+    {
+      "id": 10,
+      "name": "Auberta Cotgrave",
+      "email": "acotgrave9@nasa.gov",
+      "phone": "180-296-7124"
+    }
+  ]
+}
