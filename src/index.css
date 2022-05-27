@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+table,
+td,
+tr,
+th,
+tbody {
+  border: 1px solid black;
+  border-collapse: collapse;
+  border-spacing: 0;
+  text-align: left;
+  padding: 0.5rem;
+  margin: 1rem auto;
+}
+
+.form {
+  display: grid;
+  place-items: center;
+  margin: 1rem auto;
+}
