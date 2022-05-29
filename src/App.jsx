@@ -1,182 +1,169 @@
-import { useState, useEffect } from "react";
-import "./App.css";
-import Delete from "./Delete";
+import React, { useEffect, useState } from "react";
 import Form from "./Form";
-
-function App() {
+import "./App.css";
+const url = " http://localhost:3800/posts";
+const App = () => {
   const [data, setData] = useState([]);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-  });
-  const [name, setName] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [phone, setPhone] = useState(null);
-  const [userId, setUserId] = useState(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [userid, setUserId] = useState("");
 
-  const handleFormData = (e) => {
-    setFormData((formData) => ({
-      ...formData,
-      [e.target.name]: e.target.value,
-    }));
+  useEffect(() => {
+    getData();
+  }, [url]);
+
+  const deleteButton = (id) => {
+    // console.log(id);
+    fetch(`http://localhost:3800/posts/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        return console.log(data);
+      });
+    getData();
   };
 
-  const handleSubmitPost = (e) => {
+  const getData = () => {
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        return setData(data);
+      });
+  };
+
+  const editButton = (id) => {
+    const people = {
+      name: data[id - 1].name,
+      email: data[id - 1].email,
+      phone: data[id - 1].phone,
+      id: data[id - 1].id,
+    };
+
+    setName(people.name);
+    setEmail(people.email);
+    setPhone(people.phone);
+    setUserId(people.id);
+    console.log(people);
+  };
+
+  const handleEdit = (e) => {
     e.preventDefault();
-    // console.log(formData);
-    if (
-      formData.name !== "" &&
-      formData.email !== "" &&
-      formData.phone !== ""
-    ) {
-      getDataPost();
-      formData.name = "";
-      formData.email = "";
-      formData.phone = "";
-    } else {
-      alert("enter valid details");
-    }
-  };
+    // const people = {
+    //   name: data[id - 1].name,
+    //   email: data[id - 1].email,
+    //   phone: data[id - 1].phone,
+    //   id: data[id - 1].userid,
+    // };
 
-  const getDataPost = async () => {
-    const response = await fetch("http://localhost:3800/posts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-    // const data = await response.json();
-    // console.log(data, response.status);
-  };
-  const getDataPatch = async (id, item) => {
-    const response = await fetch(`http://localhost:3800/posts/${id}`, {
+    // setName(name);
+    // setEmail(email);
+    // setPhone(phone);
+
+    // setName(people.name);
+    // setEmail(people.email);
+    // setPhone(people.phone);
+    // setUserId(people.id);
+    // console.log(name, email, phone, userid);
+
+    const people = { name, email, phone };
+
+    fetch(`http://localhost:3800/posts/${userid}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(item),
-    });
-    const data = await response.json();
-    console.log(data, response.status);
-  };
+      body: JSON.stringify(people),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        return getData();
+      });
 
-  const getData = async () => {
-    const response = await fetch("http://localhost:3800/posts");
-    const data = await response.json();
-    console.log(data);
-    setData(data);
-    setName(data[0].name);
-    setEmail(data[0].email);
-    setPhone(data[0].phone);
-    setUserId(data[0].id);
+    setName("");
+    setEmail("");
+    setPhone("");
+    setUserId("");
   };
-
-  const handleSubmitPatch = (e) => {
-    e.preventDefault();
-    const item = { name, email, phone, userId };
-    console.log(item);
-    getDataPatch(userId, item);
-  };
-
-  const updateButton = (id) => {
-    // console.log(data[id - 1]);
-    setName(data[id - 1].name);
-    setEmail(data[id - 1].email);
-    setPhone(data[id - 1].phone);
-    setUserId(data[id - 1].id);
-  };
-
-  useEffect(() => {
-    getData();
-  }, [userId]);
 
   return (
     <>
-      <section>
-        <Form
-          handleSubmitPost={handleSubmitPost}
-          handleFormData={handleFormData}
-          formData={formData}
-        />
-        <div>
-          <form onSubmit={handleSubmitPatch}>
-            <div className="name">
-              <label htmlFor="name">
-                Name:
-                <input
-                  type="text"
-                  value={name}
-                  id="name"
-                  name="name"
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </label>
-            </div>
-            <div className="email">
-              <label htmlFor="email">
-                Email:
-                <input
-                  type="email"
-                  value={email}
-                  id="email"
-                  name="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </label>
-            </div>
-            <div className="phone">
-              <label htmlFor="phone">
-                Phone:
-                <input
-                  type="text"
-                  value={phone}
-                  id="phone"
-                  name="phone"
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-              </label>
-            </div>
-            <button type="submit">Add Update Data</button>
-          </form>
-        </div>
+      <section className="columns-2">
+        <article>
+          <Form getData={getData} />
+        </article>
 
         <article>
-          <table>
-            <tbody>
-              <tr>
-                <th>s.no</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Delete</th>
-                <th>Update</th>
-              </tr>
-
-              {data.map((e) => {
-                return (
-                  <tr key={e.id}>
-                    <td>{e.id}</td>
-                    <td>{e.name}</td>
-                    <td>{e.email}</td>
-                    <td>{e.phone}</td>
-                    <td>
-                      <Delete id={e.id} />
-                    </td>
-                    <td>
-                      <button onClick={() => updateButton(e.id)}>Update</button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <form onSubmit={handleEdit} className="flex  form-2">
+            <input
+              type="text"
+              placeholder="name"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+            />
+            <input
+              type="email"
+              placeholder="email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+            <input
+              type="tel"
+              placeholder="phone"
+              onChange={(e) => setPhone(e.target.value)}
+              value={phone}
+            />
+            <button className="btn form-btn">Update user</button>
+          </form>
         </article>
+        <section className="table">
+          <article>
+            <table>
+              <tbody>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Delete</th>
+                  <th>Edit</th>
+                </tr>
+
+                {data.map((item) => {
+                  return (
+                    <tr key={item.id}>
+                      <td> {item.id} </td>
+                      <td> {item.name} </td>
+                      <td> {item.email} </td>
+                      <td> {item.phone} </td>
+                      <td>
+                        <button
+                          onClick={() => deleteButton(item.id)}
+                          className="btn-btn"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          onClick={() => editButton(item.id)}
+                          className="btn-btn"
+                        >
+                          Edit
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </article>
+        </section>
       </section>
     </>
   );
-}
+};
 
 export default App;

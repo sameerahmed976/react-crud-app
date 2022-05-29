@@ -1,42 +1,147 @@
-.App {
-  text-align: center;
+/* start of default resets */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&display=swap");
+
+:root {
+  --primary-color: #420039;
+  --secondary-color: #932f6d;
+  --text-background-color: #dcccff;
+  --background-color: #f6f2ff;
+  --transition: all 0.8s ease-in-out;
+  --box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.411);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  font-family: "Poppins", sans-serif;
+}
+html {
+  scroll-behavior: smooth;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.section-center {
+  max-width: 1170px;
+  margin: 0 auto;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  display: block;
+  border: none;
+  font-weight: 800;
+  background-color: var(--primary-color);
+  color: white;
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  padding: 0.8rem 2rem;
+  text-transform: capitalize;
+  letter-spacing: 4px;
+  cursor: pointer;
+  border-radius: 0.6rem;
+  transition: var(--transition);
+  letter-spacing: 2px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+.btn:hover {
+  background-color: var(--secondary-color);
+  color: whitesmoke;
+  transform: translateY(-0.1rem);
+}
+
+/* end of default resets */
+
+.columns-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 2rem;
+  gap: 1rem;
+}
+
+.flex {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  height: 30vh;
+  background-color: var(--text-background-color);
+  color: black;
+  font-weight: 900;
+}
+
+.flex input {
+  padding: 0.5rem 1rem;
+  margin: 1rem;
+  width: 80%;
+  border: 1px solid gray;
+  outline: none;
+  border-radius: 0.5rem;
+  text-transform: capitalize;
+}
+
+.form-2 {
+  background-color: var(--secondary-color);
+}
+
+.form-btn {
+  text-align: center;
+  margin: 1rem;
+}
+
+.table {
+  width: 100%;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+table,
+td,
+tr,
+th,
+tbody {
+  border: 1px solid black;
+  border-collapse: collapse;
+  border-spacing: 0;
+  text-align: left;
+  padding: 0.5rem;
+  margin: 1rem auto;
+}
+
+tr:nth-child(even) {
+  background-color: var(--primary-color);
+  font-weight: 600;
+  color: #dcccff;
+}
+
+tr:nth-child(odd) {
+  background-color: #932f6d;
+  color: #f6f2ff;
+}
+
+.btn-btn {
+  padding: 0.3rem 1rem;
+  font-size: 1rem;
+  font-weight: 900;
+  text-transform: capitalize;
+  border: none;
+  cursor: pointer;
+  background-color: #f6f2ff;
+  transition: all 0.85s ease-in-out;
+}
+
+.btn-btn:hover {
+  background-color: #dcccff;
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-button {
-  font-size: calc(10px + 2vmin);
 }
